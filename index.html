@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이영성 | AI & Backend Developer Portfolio</title>
+    <title>이영성 | Web & AI Developer Portfolio</title>
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Noto Sans KR -->
@@ -47,15 +47,25 @@
             margin-top: 10px;
             border-radius: 2px;
         }
-        .step-label {
-            display: inline-block;
-            background: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        
+        /* 이미지 모달(팝업) 스타일 */
+        #imageModal {
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        #imageModal.show {
+            display: flex;
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #modalImage {
+            max-height: 90vh;
+            max-width: 90vw;
+            object-fit: contain;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -81,12 +91,12 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto flex flex-col justify-center min-h-[80vh]">
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto flex flex-col justify-center min-h-[50vh]">
         <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
             Hello, I'm <br>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">이영성</span>
         </h1>
-        <h2 class="text-2xl md:text-3xl font-medium text-gray-400 mb-8">AI & Backend Server Developer</h2>
+        <h2 class="text-2xl md:text-3xl font-medium text-gray-400 mb-8">Web & AI Developer</h2>
         
         <div class="flex flex-wrap gap-4 mt-4">
             <a href="mailto:eevil0111@gmail.com" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-lg transition-colors border border-gray-700">
@@ -162,8 +172,8 @@
                     <i class="fa-solid fa-desktop text-3xl text-blue-400 mb-4"></i>
                     <h3 class="text-xl font-bold text-white mb-4">Frontend</h3>
                     <ul class="space-y-2">
-                        <li><i class="fa-brands fa-html5 mr-2 text-gray-400"></i>HTML / CSS</li>
-                        <li><i class="fa-brands fa-js mr-2 text-gray-400"></i>JavaScript</li>
+                        <li><i class="fa-brands fa-react mr-2 text-gray-400"></i>React</li>
+                        <li><i class="fa-solid fa-wind mr-2 text-gray-400"></i>Tailwind CSS</li>
                     </ul>
                 </div>
             </div>
@@ -176,186 +186,417 @@
             <h2 class="text-3xl font-bold text-white mb-12 section-title">Projects</h2>
             
             <div class="space-y-16">
-                <!-- Project 1: HOME MATE -->
-                <div class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 shadow-2xl">
-                    <div class="p-8 md:p-10">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-4">
+                <!-- ==================== Project 1: HOME MATE ==================== -->
+                <div class="bg-gray-900 rounded-3xl overflow-hidden border border-gray-700 shadow-2xl">
+                    <div class="p-8 md:p-12">
+                        
+                        <!-- Header -->
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-10 pb-6 border-b border-gray-800">
                             <div>
-                                <h3 class="text-3xl font-extrabold text-white mb-2">HOME MATE</h3>
-                                <p class="text-lg text-gray-400">부동산 추천 AI 컨시어지 서비스</p>
+                                <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-3">HOME MATE</h3>
+                                <p class="text-xl text-blue-400 font-medium">부동산 추천 AI 컨시어지 서비스</p>
                             </div>
-                            <div class="text-left md:text-right">
-                                <p class="text-blue-400 font-semibold">2026.02 - 2026.03 (2개월)</p>
-                                <p class="text-sm">팀 프로젝트</p>
+                            <div class="mt-4 md:mt-0 text-left md:text-right">
+                                <p class="text-gray-300 font-semibold bg-gray-800 px-3 py-1 rounded-md inline-block mb-2">2026.02 - 2026.03 (2개월)</p>
+                                <p class="text-sm text-gray-400">팀 프로젝트</p>
                             </div>
                         </div>
 
-                        <!-- 8-Step Structure -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mt-10">
-                            
-                            <!-- 1. 한줄 요약 -->
-                            <div class="col-span-1 md:col-span-2">
-                                <span class="step-label">01. 한줄 요약</span>
-                                <p class="text-white text-lg font-medium">사용자의 자연어 대화와 라이프스타일을 분석하여 최적의 부동산 매물을 찾아주는 AI 컨시어지 서비스</p>
-                            </div>
+                        <!-- 01. 한줄 요약 -->
+                        <div class="mb-12">
+                            <p class="text-white text-2xl md:text-3xl font-bold leading-snug border-l-4 border-blue-500 pl-6 py-2">
+                                사용자의 자연어 대화와 라이프스타일을 분석하여 <br class="hidden md:block">최적의 부동산 매물을 찾아주는 AI 컨시어지 서비스
+                            </p>
+                        </div>
 
-                            <!-- 2. 배경 및 목표 -->
-                            <div>
-                                <span class="step-label">02. 배경 및 목표</span>
-                                <p>기존 부동산 앱의 복잡한 필터 검색 방식에 피로도를 느끼는 사용자들에게, 일상적인 대화만으로도 원하는 조건(예: "강남역 도보 10분, 월세 100 이하")과 주변 인프라까지 고려한 맞춤형 매물을 추천하는 혁신적인 UX를 제공하고자 기획했습니다.</p>
-                            </div>
-
-                            <!-- 3. 역할 및 기여도 -->
-                            <div>
-                                <span class="step-label">03. 역할 및 기여도</span>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><strong class="text-white">팀장 (기획 총괄 및 백엔드/AI 리드)</strong></li>
-                                    <li>대규모 데이터 수집 파이프라인 구축 및 MongoDB 스키마 설계</li>
-                                    <li>AI 챗봇 엔진 및 검색 백엔드 로직 100% 구현</li>
-                                </ul>
-                            </div>
-
-                            <!-- 4. 기술 및 도구 -->
-                            <div class="col-span-1 md:col-span-2">
-                                <span class="step-label">04. 사용 기술 및 도구</span>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">Python</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">Flask</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">MongoDB Atlas</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">LangChain</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">OpenAI API</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">Web Crawling</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">Map API</span>
-                                </div>
-                            </div>
-
-                            <!-- 5. 진행 과정 -->
-                            <div>
-                                <span class="step-label">05. 진행 과정</span>
-                                <ul class="list-disc list-inside space-y-2">
-                                    <li>크롤링 및 공공데이터를 결합해 <strong class="text-white">약 3만 건의 매물과 4만 건의 인프라 데이터를 직접 수집·전처리</strong>하여 DB 적재 및 공간 매핑.</li>
-                                    <li>LangChain과 GPT 프롬프트를 활용, 자연어를 MongoDB 검색용 JSON 필터로 자동 변환하는 파이프라인 구축.</li>
-                                    <li>추천 정확도를 높이기 위해 '다중 조건 가중합 기반의 스코어링 모델' 설계 및 데이터 튜닝 진행.</li>
-                                </ul>
-                            </div>
-
-                            <!-- 6. 결과 및 성과 -->
-                            <div>
-                                <span class="step-label">06. 결과 및 성과</span>
-                                <ul class="list-disc list-inside space-y-2">
-                                    <li>UI 조작 없이 텍스트 대화만으로 복합 조건 매물을 검색하는 서비스 상용화 달성.</li>
-                                    <li>공간 인덱싱 최적화를 통해 평균 <strong class="text-blue-400">데이터 조회 시간을 0.2초 이내로 단축 (80% 이상 성능 향상)</strong>시켰습니다.</li>
-                                </ul>
-                            </div>
-
-                            <!-- 7. 어려움 및 해결 -->
-                            <div>
-                                <span class="step-label">07. 어려움 및 해결 과정</span>
-                                <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 mt-2">
-                                    <p class="mb-2"><strong class="text-red-400">문제:</strong> 수만 건의 방대한 공간 데이터를 다중 조건으로 검색할 때 심각한 서버 부하와 속도 지연(병목) 발생.</p>
-                                    <p><strong class="text-green-400">해결:</strong> MongoDB Atlas로 전환 후 논리적 스키마 재설계. <code class="bg-gray-900 text-blue-300 px-1 rounded">$geoWithin</code>, <code class="bg-gray-900 text-blue-300 px-1 rounded">$centerSphere</code> 공간 연산 쿼리 및 공간 인덱스를 적극 도입하여 검색 속도를 획기적으로 개선.</p>
-                                </div>
-                            </div>
-
-                            <!-- 8. 배운 점 -->
-                            <div>
-                                <span class="step-label">08. 배운 점</span>
-                                <p class="mt-2 bg-blue-900/20 border border-blue-900/50 p-4 rounded-lg text-gray-300">
-                                    물리적인 제약이 적은 NoSQL(MongoDB) 환경일수록, 서비스 성능을 극대화하기 위해서는 애플리케이션 레벨에서의 <strong class="text-white">정교한 데이터베이스 스키마 설계와 인덱싱 최적화가 필수적</strong>이라는 것을 뼈저리게 체득했습니다.
+                        <!-- 02 & 03: 배경 및 역할 (Grid) -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                            <!-- 배경 및 목표 -->
+                            <div class="bg-gray-800/30 p-6 rounded-2xl border border-gray-800">
+                                <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><span class="text-blue-500 opacity-70">02.</span> 배경 및 목표</h4>
+                                <p class="text-gray-300 leading-relaxed">
+                                    기존 부동산 서비스의 물리적 스펙 위주 검색이 가진 한계를 벗어나고자 했습니다. 인프라를 중시하는 2030 1인 가구를 타겟으로, 간단한 설문을 통해 선호하는 라이프스타일을 파악하고 이에 꼭 맞는 매물을 추천하는 맞춤형 주거 큐레이션 서비스를 목표로 했습니다.
                                 </p>
                             </div>
-
+                            
+                            <!-- 역할 및 기여도 -->
+                            <div class="bg-gray-800/30 p-6 rounded-2xl border border-gray-800">
+                                <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><span class="text-blue-500 opacity-70">03.</span> 역할 및 기여도</h4>
+                                <p class="font-bold text-white mb-3 pb-3 border-b border-gray-700/50"><i class="fa-solid fa-user-check text-blue-400 mr-2"></i>팀장 (기획 총괄 및 백엔드/AI 리드)</p>
+                                <ul class="space-y-3 text-sm text-gray-300">
+                                    <li class="flex items-start gap-3"><span class="text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded shrink-0">100%</span> <span>AI 챗봇 엔진과 MongoDB 기반 스키마 설계 및 백엔드 로직 전담</span></li>
+                                    <li class="flex items-start gap-3"><span class="text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded shrink-0">80%</span> <span>부동산 및 인프라 원천 데이터의 수집, 전처리, DB 적재 파이프라인 구축</span></li>
+                                    <li class="flex items-start gap-3"><span class="text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded shrink-0">70%</span> <span>서비스에 최적화된 다중 조건 가중합 스코어링 알고리즘 발굴 및 추천 로직 적용</span></li>
+                                </ul>
+                            </div>
                         </div>
+
+                        <!-- 04. 사용 기술 및 도구 -->
+                        <div class="mb-12">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">04.</span> 사용 기술 및 도입 이유</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">Python</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">풍부한 데이터 처리 생태계를 바탕으로 웹 크롤링부터 AI 로직까지 통합 구현하기 위해 채택</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">Flask</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">가볍고 유연한 마이크로 프레임워크로, Python 기반의 AI 모듈 및 데이터 스크립트와 가장 빠르게 연동하기 위해 사용</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">MongoDB Atlas</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">NoSQL 특유의 유연한 스키마로 데이터를 직관적으로 관리하며, <code class="bg-gray-900 text-gray-300 px-1.5 py-0.5 rounded">2dsphere</code> 공간 인덱스를 활용해 위치 기반 검색의 처리 속도를 극대화</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">LangChain</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">복잡한 프롬프트 체이닝을 모듈화하고, 사용자의 자연어를 검색 쿼리로 변환하는 LLM 파이프라인을 효율적으로 구축하기 위해 도입</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">OpenAI API (GPT-4o-mini)</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">실시간 챗봇 서비스에 필수적인 '빠른 연산 속도'와 대규모 텍스트 처리에 적합한 '저렴한 토큰 비용'을 모두 충족</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">Web Crawling (Selenium)</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">자바스크립트(JS)로 렌더링되는 동적 웹 페이지의 부동산 데이터를 안정적으로 수집하기 위해 활용</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 05. 진행 과정 -->
+                        <div class="mb-12">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">05.</span> 진행 과정</h4>
+                            <div class="space-y-4">
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0">1주차: 기획 및 아키텍처 설계</span> 
+                                    <span class="text-gray-300 text-sm leading-relaxed mt-1 md:mt-0">타겟 사용자 분석을 통한 서비스 요구사항 정의 및 '다중 조건 가중합 스코어링' 추천 로직 구상</span>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0">2주차: 데이터 파이프라인 구축</span> 
+                                    <span class="text-gray-300 text-sm leading-relaxed mt-1 md:mt-0">크롤링 및 공공데이터를 결합해 약 7만 건(매물 3만, 인프라 4만)의 원천 데이터 수집·전처리 후, MongoDB 스키마 설계 및 데이터 적재</span>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0">3주차: AI & 백엔드 구현</span> 
+                                    <span class="text-gray-300 text-sm leading-relaxed mt-1 md:mt-0">LangChain과 GPT를 연동하여, 사용자의 자연어를 MongoDB 검색용 JSON 필터로 자동 변환하는 챗봇 엔진 및 검색 API 구현</span>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0">4주차: QA 및 데이터 튜닝</span> 
+                                    <span class="text-gray-300 text-sm leading-relaxed mt-1 md:mt-0">통합 테스트를 통한 버그 수정 진행. 추천 정확도 향상을 위한 스코어링 가중치 파라미터의 세밀한 튜닝 및 검색 성능 최적화 반복</span>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-700/30 p-4 rounded-xl border border-gray-600/50 mt-6 relative overflow-hidden">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-400"></div>
+                                    <span class="text-gray-200 font-bold bg-gray-700 px-3 py-1 rounded-md text-sm shrink-0"><i class="fa-solid fa-code-branch mr-2"></i>협업 및 형상 관리</span> 
+                                    <span class="text-gray-300 text-sm leading-relaxed mt-1 md:mt-0">4인 프로젝트 팀장으로서 GitHub Branch 전략을 도입해 충돌 없이 코드를 관리하고, Notion과 Slack을 활용해 일정과 이슈를 애자일하게 공유하며 소통함</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 06. 결과 및 성과 -->
+                        <div class="mb-14">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">06.</span> 결과 및 성과</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-gradient-to-br from-blue-900/30 to-gray-800/50 p-6 rounded-2xl border border-blue-900/50">
+                                    <div class="text-blue-400 text-3xl mb-4"><i class="fa-solid fa-bullseye"></i></div>
+                                    <strong class="text-white text-lg block mb-3">추천 파이프라인 완성</strong> 
+                                    <p class="text-gray-400 text-sm leading-relaxed">단순 물리적 스펙(가격/위치) 필터링을 넘어, 사용자의 라이프스타일 설문과 주변 인프라 데이터를 결합한 '다중 조건 가중합 스코어링 모델'을 자체 설계하여 맞춤형 Top-5 매물 추천 로직을 성공적으로 구현했습니다.</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-blue-900/30 to-gray-800/50 p-6 rounded-2xl border border-blue-900/50">
+                                    <div class="text-blue-400 text-3xl mb-4"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                    <strong class="text-white text-lg block mb-3">자연어 기반 UX 혁신</strong> 
+                                    <p class="text-gray-400 text-sm leading-relaxed">LLM과 LangChain을 활용해 사용자의 일상적인 대화(자연어)를 MongoDB 검색용 JSON 필터로 자동 파싱하는 챗봇 엔진을 개발하여, 기존의 복잡한 다단계 UI 필터 조작 과정을 텍스트 입력 하나로 단축시켰습니다.</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-blue-900/30 to-gray-800/50 p-6 rounded-2xl border border-blue-900/50 relative overflow-hidden">
+                                    <div class="absolute -right-4 -bottom-4 text-blue-500/10 text-8xl"><i class="fa-solid fa-gauge-high"></i></div>
+                                    <div class="text-blue-400 text-3xl mb-4 relative z-10"><i class="fa-solid fa-server"></i></div>
+                                    <strong class="text-white text-lg block mb-3 relative z-10">DB 성능 80% 향상</strong> 
+                                    <p class="text-gray-400 text-sm leading-relaxed relative z-10">수만 건의 매물 및 상권 데이터 검색 시 발생하는 병목 현상을 해결하기 위해 공간 인덱싱(<code class="bg-gray-900 text-blue-300 px-1 rounded">2dsphere</code>)을 적용하여, <strong class="text-blue-300">평균 데이터 조회 시간을 0.2초 이내로 단축</strong>하는 기술적 성과를 달성했습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 07. 어려움 및 해결 과정 -->
+                        <div class="mb-14">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">07.</span> 트러블슈팅 (어려움 및 해결 과정)</h4>
+                            <div class="bg-gray-800/40 rounded-2xl p-6 md:p-8 border border-gray-700">
+                                
+                                <!-- 문제 및 원인 -->
+                                <div class="mb-8">
+                                    <h5 class="text-red-400 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> 발생한 문제 및 원인</h5>
+                                    <div class="bg-red-900/10 p-5 rounded-xl border border-red-900/20">
+                                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                                            <strong class="text-red-300">[문제점]</strong> AI 챗봇 구현 초기, 사용자가 이전에 입력한 매물 필터링 조건이 대화 도중 초기화되거나, 실제 DB에 존재하지 않는 가상의 지명을 추천하는 오류가 발생했습니다.
+                                        </p>
+                                        <p class="text-gray-300 text-sm leading-relaxed">
+                                            <strong class="text-yellow-500">[원인]</strong> LLM 특유의 상태 비저장(Stateless) 구조로 인한 맥락 휘발성 문제와, 허위 정보를 생성하는 할루시네이션(환각) 현상 때문이었습니다.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- 해결 과정 -->
+                                <div>
+                                    <h5 class="text-green-400 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-check-circle"></i> 해결 과정</h5>
+                                    <div class="space-y-3 text-sm text-gray-300">
+                                        <div class="bg-green-900/10 p-4 rounded-xl border border-green-900/20 flex gap-3">
+                                            <strong class="text-green-400 shrink-0">해결 1.</strong>
+                                            <p class="leading-relaxed"><strong class="text-white">상태 누적 기반 맥락 유지:</strong> 대화의 흐름이 끊기지 않도록 '상태 누적(State Accumulation) 방식'의 변수를 도입했습니다. 사용자의 이전 필터링 조건과 대화 맥락을 시스템에 지속적으로 유지하여 조건 초기화 문제를 해결했습니다.</p>
+                                        </div>
+                                        <div class="bg-green-900/10 p-4 rounded-xl border border-green-900/20 flex gap-3">
+                                            <strong class="text-green-400 shrink-0">해결 2.</strong>
+                                            <p class="leading-relaxed"><strong class="text-white">프롬프트 제약을 통한 환각 차단:</strong> 시스템 프롬프트에 '반드시 DB 검색을 통해 도출된 결과 데이터 내에서만 답변을 생성할 것'이라는 강력한 제약 조건을 부여하여, AI가 임의의 지명을 지어내는 할루시네이션 문제를 완벽하게 통제했습니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- 08. 배운 점 -->
+                        <div>
+                            <div class="bg-gradient-to-r from-blue-900/40 to-gray-800/80 border border-blue-800/50 rounded-2xl p-8 relative overflow-hidden shadow-inner">
+                                <i class="fa-solid fa-quote-right absolute -top-4 -right-4 text-7xl text-blue-500/10"></i>
+                                <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2 relative z-10"><span class="text-blue-400 opacity-70">08.</span> 배운 점</h4>
+                                <p class="text-gray-200 leading-relaxed text-lg relative z-10">
+                                    LLM(대형 언어 모델)은 만능이 아니며, 이를 실제 상용 서비스 레벨로 끌어올리기 위해서는 모델의 태생적 한계(맥락 휘발성, 환각 현상)를 명확히 이해해야 함을 깨달았습니다. 단순히 API를 호출하는 것을 넘어, 상태 관리(State Management) 로직과 정교한 프롬프트 엔지니어링을 통해 <strong class="text-white border-b-2 border-blue-500 pb-0.5">AI를 완벽하게 통제하는 '엔지니어링 역량'의 중요성</strong>을 실무적으로 체득했습니다.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- 갤러리 영역 -->
+                        <div class="mt-16 pt-12 border-t border-gray-800">
+                            <h4 class="text-xl font-bold text-white mb-6"><i class="fa-regular fa-image mr-2 text-blue-400"></i>서비스 실제 구동 화면</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="group cursor-pointer" onclick="openModal('홈메이트 메인화면.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="홈메이트 메인화면.png" alt="홈메이트 메인화면" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">서비스 메인 화면</p>
+                                </div>
+                                <div class="group cursor-pointer" onclick="openModal('홈메이트 매물찾기.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="홈메이트 매물찾기.png" alt="홈메이트 매물찾기" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">매물 검색 맵뷰 및 AI 챗봇 컨시어지</p>
+                                </div>
+                                <div class="group cursor-pointer" onclick="openModal('홈메이트 결과 step 1.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="홈메이트 결과 step 1.png" alt="라이프스타일 분석" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">라이프스타일 설문 분석 결과</p>
+                                </div>
+                                <div class="group cursor-pointer" onclick="openModal('홈메이트 결과 step 2.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="홈메이트 결과 step 2.png" alt="AI 코멘트" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">자체 가성비 점수 및 AI 맞춤 코멘트</p>
+                                </div>
+                                <div class="group cursor-pointer" onclick="openModal('홈메이트 마이페이지.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="홈메이트 마이페이지.png" alt="마이페이지" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">사용자 마이페이지 및 찜 목록</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Project 2: Mise -->
-                <div class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 shadow-2xl">
-                    <div class="p-8 md:p-10">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-4">
+                <!-- ==================== Project 2: Mise ==================== -->
+                <div class="bg-gray-900 rounded-3xl overflow-hidden border border-gray-700 shadow-2xl mt-16">
+                    <div class="p-8 md:p-12">
+                        
+                        <!-- Header -->
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-10 pb-6 border-b border-gray-800">
                             <div>
-                                <h3 class="text-3xl font-extrabold text-white mb-2">Mise</h3>
-                                <p class="text-lg text-gray-400">유튜브 영상 기반 요리 레시피 추출 및 최저가 장보기 서비스</p>
+                                <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Mise</h3>
+                                <p class="text-xl text-blue-400 font-medium">유튜브 영상 기반 요리 레시피 추출 및 최저가 장보기 서비스</p>
                             </div>
-                            <div class="text-left md:text-right">
-                                <p class="text-blue-400 font-semibold">2026.01 - 2026.02 (2개월)</p>
-                                <p class="text-sm">팀 프로젝트</p>
+                            <div class="mt-4 md:mt-0 text-left md:text-right">
+                                <p class="text-gray-300 font-semibold bg-gray-800 px-3 py-1 rounded-md inline-block mb-2">2026.01 - 2026.02 (2개월)</p>
+                                <p class="text-sm text-gray-400">팀 프로젝트</p>
                             </div>
                         </div>
 
-                        <!-- 8-Step Structure -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mt-10">
-                            
-                            <!-- 1. 한줄 요약 -->
-                            <div class="col-span-1 md:col-span-2">
-                                <span class="step-label">01. 한줄 요약</span>
-                                <p class="text-white text-lg font-medium">유튜브 요리 영상에서 레시피를 자동 추출하고 이커머스와 연동해 1인분 최저가 장보기 리스트를 제공하는 시스템</p>
-                            </div>
+                        <!-- 01. 한줄 요약 -->
+                        <div class="mb-12">
+                            <p class="text-white text-2xl md:text-3xl font-bold leading-snug border-l-4 border-blue-500 pl-6 py-2">
+                                추출된 레시피 식재료를 기반으로 1인분 기준 최저가를 산출하고, <br class="hidden md:block">즉시 구매 가능한 이커머스 링크를 제공하는 장보기 자동화 시스템
+                            </p>
+                        </div>
 
-                            <!-- 2. 배경 및 목표 -->
-                            <div>
-                                <span class="step-label">02. 배경 및 목표</span>
-                                <p>유튜브 요리 영상을 보고 직접 요리하려는 사용자들이 레시피를 따로 메모하고 식재료를 쇼핑몰에서 일일이 검색해야 하는 번거로움을 해결하기 위해, 영상 시청부터 최저가 장보기까지 한 번에 이어지는 원스톱(One-stop) 서비스를 목표로 했습니다.</p>
-                            </div>
-
-                            <!-- 3. 역할 및 기여도 -->
-                            <div>
-                                <span class="step-label">03. 역할 및 기여도</span>
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li><strong class="text-white">데이터 추출 파이프라인 및 백엔드 로직 설계 리드</strong></li>
-                                    <li>비동기 처리(Asyncio) 아키텍처 도입</li>
-                                    <li>데이터 규격화 알고리즘 구현</li>
-                                </ul>
-                            </div>
-
-                            <!-- 4. 기술 및 도구 -->
-                            <div class="col-span-1 md:col-span-2">
-                                <span class="step-label">04. 사용 기술 및 도구</span>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">Python (Asyncio)</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">LangChain</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">OpenAI API (Whisper)</span>
-                                    <span class="bg-gray-800 border border-gray-600 px-3 py-1 rounded-full text-sm">Tavily Search API</span>
-                                </div>
-                            </div>
-
-                            <!-- 5. 진행 과정 -->
-                            <div>
-                                <span class="step-label">05. 진행 과정</span>
-                                <ul class="list-disc list-inside space-y-2">
-                                    <li>OpenAI Whisper(STT)를 활용해 영상 음성을 텍스트로 추출하고, Tavily Search API를 연동한 동적 검색 로직 구현.</li>
-                                    <li>비표준화된 수량 표현('약간', '1큰술')을 <strong class="text-white">표준 규격(g, ml)으로 매핑하는 알고리즘을 개발</strong>하여 최저 단가 계산의 정확도 향상.</li>
-                                    <li>실제 구매 페이지 URL을 추출하여 바로 이동할 수 있는 링크 연동 기능 개발.</li>
-                                </ul>
-                            </div>
-
-                            <!-- 6. 결과 및 성과 -->
-                            <div>
-                                <span class="step-label">06. 결과 및 성과</span>
-                                <ul class="list-disc list-inside space-y-2">
-                                    <li>수동 검색 과정을 완전히 생략하고 구매 전환율을 높일 수 있는 동적 자동화 로직 완성.</li>
-                                    <li>비동기 병렬 처리를 통해 <strong class="text-blue-400">기존 2분 소요되던 파이프라인 응답 시간을 30초로 단축 (75% 성능 최적화)</strong>했습니다.</li>
-                                </ul>
-                            </div>
-
-                            <!-- 7. 어려움 및 해결 -->
-                            <div>
-                                <span class="step-label">07. 어려움 및 해결 과정</span>
-                                <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 mt-2">
-                                    <p class="mb-2"><strong class="text-red-400">문제:</strong> 여러 이커머스 쇼핑몰 API를 순차 호출(직렬 처리) 시, 네트워크 응답을 기다리는 I/O 병목 현상으로 대기 시간이 2분 이상 소요됨.</p>
-                                    <p><strong class="text-green-400">해결:</strong> 파이썬의 <strong class="text-white">Asyncio를 도입하여 비동기 병렬 처리 구조로 전면 개편</strong>. 복수의 검색 요청을 동시에 실행하고 취합하여 네트워크 대기 시간을 최소화함.</p>
-                                </div>
-                            </div>
-
-                            <!-- 8. 배운 점 -->
-                            <div>
-                                <span class="step-label">08. 배운 점</span>
-                                <p class="mt-2 bg-blue-900/20 border border-blue-900/50 p-4 rounded-lg text-gray-300">
-                                    외부 API 호출이 잦은 I/O Bound 작업에서는 단순한 로직 개선보다, <strong class="text-white">비동기 프로그래밍(Asyncio)과 같은 아키텍처적인 접근</strong>이 성능 최적화에 압도적으로 강력하다는 것을 실전 경험을 통해 배웠습니다.
+                        <!-- 02 & 03: 배경 및 역할 (Grid) -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                            <!-- 배경 및 목표 -->
+                            <div class="bg-gray-800/30 p-6 rounded-2xl border border-gray-800">
+                                <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><span class="text-blue-500 opacity-70">02.</span> 배경 및 목표</h4>
+                                <p class="text-gray-300 leading-relaxed">
+                                    유튜브 요리 영상을 보고 직접 요리하려는 사용자들이 "1인분을 만들 때 실제로 돈이 얼마나 드는지" 직관적으로 알기 어렵고, 식재료를 쇼핑몰에서 일일이 검색해야 하는 번거로움을 해결하기 위해 기획했습니다. 비용 계산부터 식재료 구매까지 한 번에 이어지는 매끄러운 원스톱(One-Stop) UX를 목표로 했습니다.
                                 </p>
                             </div>
-
+                            
+                            <!-- 역할 및 기여도 -->
+                            <div class="bg-gray-800/30 p-6 rounded-2xl border border-gray-800">
+                                <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><span class="text-blue-500 opacity-70">03.</span> 역할 및 기여도</h4>
+                                <p class="font-bold text-white mb-3 pb-3 border-b border-gray-700/50"><i class="fa-solid fa-user-check text-blue-400 mr-2"></i>단가 산출 백엔드 및 웹 프론트엔드 구현 리드</p>
+                                <ul class="space-y-3 text-sm text-gray-300">
+                                    <li class="flex items-start gap-3"><span class="text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded shrink-0">100%</span> <span>식재료 서칭, 1인분 단가 변환 및 총액 산출 백엔드 로직 설계</span></li>
+                                    <li class="flex items-start gap-3"><span class="text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded shrink-0">100%</span> <span>검색 결과 및 다이렉트 구매 링크 렌더링을 위한 프론트엔드 웹 페이지 구성</span></li>
+                                    <li class="flex items-start gap-3"><span class="text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded shrink-0">100%</span> <span>LLM 프롬프트 엔지니어링을 통한 식재료 가격 '2차 검증 시스템' 구축</span></li>
+                                </ul>
+                            </div>
                         </div>
+
+                        <!-- 04. 사용 기술 및 도구 -->
+                        <div class="mb-12">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">04.</span> 사용 기술 및 도입 이유</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">Python</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">식재료 데이터를 파싱하고 1인분 기준으로 수량을 환산하는 핵심 백엔드 비즈니스 로직 구현</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">Gemini API</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">GPT 대비 빠르고 논리적인 연산 능력을 활용하여 식재료 가격의 합리성을 판단하는 2차 검증 엔진으로 채택</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">React & Tailwind CSS</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">산출된 재료별 단가와 구매 링크를 사용자에게 직관적으로 보여주며, 상태 변화에 따른 빠르고 부드러운 화면 렌더링과 반응형 웹 디자인을 구현하기 위해 도입</p>
+                                </div>
+                                <div class="flex flex-col p-5 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                    <strong class="text-blue-400 text-lg mb-2">Tavily Search API / Crawling</strong>
+                                    <p class="text-sm text-gray-400 leading-relaxed">DB에 저장된 식재료를 기반으로 실시간 이커머스 최저가 상품 정보를 동적으로 자동 검색</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 05. 진행 과정 -->
+                        <div class="mb-12">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">05.</span> 진행 과정</h4>
+                            <div class="space-y-4">
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0 w-28 text-center">1단계</span> 
+                                    <div>
+                                        <strong class="text-white text-sm block mb-1">데이터 전처리 및 단가 환산</strong>
+                                        <span class="text-gray-300 text-sm leading-relaxed">DB에 적재된 식재료 데이터를 파싱하고, 사용자가 선택한 '인분' 수에 맞춰 단위(g, ml)를 표준화하여 필요 수량을 환산하는 백엔드 비즈니스 로직을 구현했습니다.</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0 w-28 text-center">2단계</span> 
+                                    <div>
+                                        <strong class="text-white text-sm block mb-1">동적 검색 및 AI 가격 검증</strong>
+                                        <span class="text-gray-300 text-sm leading-relaxed">실시간 이커머스 API를 연동해 최저가 상품을 서칭한 뒤, Gemini 기반의 '2차 검증 프롬프트'를 거쳐 터무니없는 가격이나 대용량 상품을 필터링하는 검증 파이프라인을 구축했습니다.</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 items-start bg-gray-800/20 p-4 rounded-xl">
+                                    <span class="text-white font-bold bg-blue-600 px-3 py-1 rounded-md text-sm shrink-0 w-28 text-center">3단계</span> 
+                                    <div>
+                                        <strong class="text-white text-sm block mb-1">프론트엔드 렌더링 및 UX 최적화</strong>
+                                        <span class="text-gray-300 text-sm leading-relaxed">React와 Tailwind CSS를 활용해 검증이 완료된 재료별 단가와 총액을 직관적으로 시각화하고, 원스톱 구매가 가능한 다이렉트 링크 연동 웹 페이지를 구성했습니다.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 06. 결과 및 성과 -->
+                        <div class="mb-14">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">06.</span> 결과 및 성과</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-gradient-to-br from-blue-900/30 to-gray-800/50 p-6 rounded-2xl border border-blue-900/50">
+                                    <div class="text-blue-400 text-3xl mb-4"><i class="fa-solid fa-calculator"></i></div>
+                                    <strong class="text-white text-lg block mb-3">단가 계산 자동화</strong> 
+                                    <p class="text-gray-400 text-sm leading-relaxed">사용자가 직접 계산할 필요 없이, 복잡한 레시피 식재료의 1인분 기준 소요 비용과 총액을 실시간으로 산출하는 시스템을 상용화 수준으로 완성했습니다.</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-blue-900/30 to-gray-800/50 p-6 rounded-2xl border border-blue-900/50">
+                                    <div class="text-blue-400 text-3xl mb-4"><i class="fa-solid fa-cart-shopping"></i></div>
+                                    <strong class="text-white text-lg block mb-3">구매 전환율 극대화 UX</strong> 
+                                    <p class="text-gray-400 text-sm leading-relaxed">수동 검색 과정을 완전히 생략하고, 각 식재료 항목마다 최저가 구매 페이지로 뻗어 나가는 다이렉트 링크 UI를 구현하여 서비스의 실용성을 대폭 끌어올렸습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 07. 어려움 및 해결 과정 -->
+                        <div class="mb-14">
+                            <h4 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><span class="text-blue-500 opacity-70">07.</span> 트러블슈팅 (어려움 및 해결 과정)</h4>
+                            <div class="bg-gray-800/40 rounded-2xl p-6 md:p-8 border border-gray-700">
+                                
+                                <!-- 문제 및 원인 -->
+                                <div class="mb-8">
+                                    <h5 class="text-red-400 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> 발생한 문제 및 원인</h5>
+                                    <div class="bg-red-900/10 p-5 rounded-xl border border-red-900/20">
+                                        <p class="text-gray-300 text-sm leading-relaxed mb-3">
+                                            <strong class="text-red-300">[문제점]</strong> 개발 초기 GPT 모델을 연동하여 식재료 단가를 산출했을 때, 1인분 기준 가격 계산에서 잦은 오류가 발생하거나 터무니없이 비싸거나 싼(비정상적인 대용량 등) 식재료를 추천하는 문제가 발생했습니다.
+                                        </p>
+                                        <p class="text-gray-300 text-sm leading-relaxed">
+                                            <strong class="text-yellow-500">[원인]</strong> 단순 텍스트 생성에 특화된 프롬프트만으로는 수치 기반의 연산과 '시장 가격의 합리성'을 추론하는 데 LLM의 한계(환각 현상)가 존재했습니다.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- 해결 과정 -->
+                                <div>
+                                    <h5 class="text-green-400 font-bold mb-3 flex items-center gap-2"><i class="fa-solid fa-check-circle"></i> 해결 과정</h5>
+                                    <div class="space-y-3 text-sm text-gray-300">
+                                        <div class="bg-green-900/10 p-5 rounded-xl border border-green-900/20">
+                                            <strong class="text-green-400 block mb-2">모델 교체 및 2차 검증 로직 도입</strong>
+                                            <p class="leading-relaxed"><strong class="text-white">Gemini 모델 도입:</strong> 연산 및 논리 추론에 강점이 있는 Gemini 모델로 LLM 엔진을 전격 교체했습니다.</p>
+                                            <p class="leading-relaxed mt-2"><strong class="text-white">다단계 검증(Validation):</strong> 단순히 1차 검색된 결과를 그대로 보여주는 것이 아니라, "검색된 재료의 가격이 일반적인 시장가 대비 합리적인지"를 모델이 스스로 2차 검증하도록 정교한 프롬프트 엔지니어링을 적용하여 터무니없는 가격 추천 문제를 90% 이상 해결했습니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- 08. 배운 점 -->
+                        <div>
+                            <div class="bg-gradient-to-r from-blue-900/40 to-gray-800/80 border border-blue-800/50 rounded-2xl p-8 relative overflow-hidden shadow-inner">
+                                <i class="fa-solid fa-quote-right absolute -top-4 -right-4 text-7xl text-blue-500/10"></i>
+                                <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2 relative z-10"><span class="text-blue-400 opacity-70">08.</span> 배운 점</h4>
+                                <p class="text-gray-200 leading-relaxed text-lg relative z-10">
+                                    개발의 본질은 사용자의 '반복적이고 번거로운 작업'을 자동화하여 실질적인 가치를 창출하는 것에 있음을 배웠습니다. 레시피 메모, 검색, 가격 비교, 장바구니 담기 등 파편화되어 있던 과정을 단일 파이프라인으로 통합하면서, 실생활의 불편함을 기술로 어떻게 해결할 것인가를 치열하게 고민하는 <strong class="text-white border-b-2 border-blue-500 pb-0.5">프로덕트 메이커로서의 시야</strong>를 넓힐 수 있었습니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 갤러리 영역 -->
+                        <div class="mt-16 pt-12 border-t border-gray-800">
+                            <h4 class="text-xl font-bold text-white mb-6"><i class="fa-regular fa-image mr-2 text-blue-400"></i>서비스 실제 구동 화면</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="group cursor-pointer" onclick="openModal('미즈 단가계산.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="미즈 단가계산.png" alt="미즈 단가계산" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">레시피 재료 매칭 및 실시간 단가 계산</p>
+                                </div>
+                                <div class="group cursor-pointer" onclick="openModal('미즈 최저가 사이트 이동.png')">
+                                    <div class="overflow-hidden rounded-xl border border-gray-700 bg-gray-800 aspect-video relative shadow-lg">
+                                        <img src="미즈 최저가 사이트 이동.png" alt="미즈 최저가 이동" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Image+Not+Found'">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                            <i class="fa-solid fa-magnifying-glass-plus text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity transform scale-50 group-hover:scale-100 duration-300"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-400 text-center mt-4 font-medium">장보기 리스트 및 최저가 구매 링크 연동</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -427,6 +668,38 @@
             <p class="mt-2 text-sm">Powered by Passion & Code.</p>
         </div>
     </footer>
+
+    <!-- 이미지 확대용 모달 (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[100] bg-black/90 items-center justify-center p-4" onclick="closeModal()">
+        <button class="absolute top-6 right-8 text-white text-4xl hover:text-blue-400 transition-colors">&times;</button>
+        <img id="modalImage" src="" alt="확대 이미지" class="rounded-lg">
+    </div>
+
+    <!-- 모달 스크립트 -->
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(imageSrc) {
+            modalImg.src = imageSrc;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // 스크롤 원상 복구
+            // 모달이 닫힌 후 깜빡임 방지를 위해 src 초기화 딜레이
+            setTimeout(() => { modalImg.src = ''; }, 200); 
+        }
+
+        // ESC 키 누르면 모달 닫기
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
